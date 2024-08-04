@@ -6,5 +6,5 @@ Requirements:
     Django version: 5.0.7
 
 Superuser:
-    username: hyder
+    username: haider
     password: 12345
