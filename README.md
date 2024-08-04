@@ -4,3 +4,7 @@ The project ARKTRACE SYSTEM is a cost-effective home security and surveillance s
 
 Requirements:
     Django version: 5.0.7
+
+Superuser:
+    username: hyder
+    password: 12345
