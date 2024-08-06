@@ -1,53 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} ArkTrack System {% endblock %}</title>
-    <!-- Load static files -->
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} ArkTrack System {% endblock %}</title>
+
+  <!-- Bulma CSS -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">  
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'home' %}">ArkTrack System&trade;</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link" href="#">Features</a>
-              <a class="nav-link" href="#">Pricing</a>
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+    <!-- Navbar -->
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item logo-static" href="{% url 'home' %}">
+                <img src="{% static 'images/logo2.svg' %}" alt="Logo" width="140" height="40">
+            </a>
+            <!-- Placeholder for current time -->
+            <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
+                <span id="current-time"></span>
             </div>
-          </div>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="dashboard">
+                    <img src="{% static 'images/bell-ring-solid-24.png' %}" width="18"> Check Activity
+                </a>
+                <a class="navbar-item" href="report">
+                    <img src="{% static 'images/shield-quarter-regular-24.png' %}" width="20"> Report
+                </a>
+                <a class="navbar-item" href="help">
+                    <img src="{% static 'images/help-circle-24.png' %}" width="20"> Help
+                </a>
+              </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main role="main" class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
+    <!-- input content on webpages -->
+    {% block content %}
+    {% endblock %}
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <span class="text-muted"> ArkTrack Systems 2024 - Property of UoL&copy;</span>
+        <div class="content has-text-centered">
+            <p>
+                <strong>ArkTrack System &trade; 2024</strong>  <a href="#"></a>. The source code is licensed under MIT License available on GitHub.
+            </p>
         </div>
     </footer>
 
-
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Custom JS -->
-    <script src="{% static 'js/custom.js' %}"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

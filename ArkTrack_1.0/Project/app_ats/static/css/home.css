@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+.navbar {
+    font-size: 16px;
+}
+
+/* Ensure the navbar spans the full width of the viewport */
+.navbar {
+    width: 100%;
+}
+
+/* Change font color on hover */
+.navbar-item:hover {
+    background-color: black;
+    scale: 1.08;
+}
+
+/* Optional: Adjust the spacing or padding of the navbar */
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.logo-static { 
+    scale: 1 !important ;
+    color: white !important ; 
+    cursor:pointer !important ;
+}
+
+.pk-time {
+    font-size: 15px;
+}
+
+.navbar-brand > a > img {
+    margin-left: 10px;
+    scale: 2.3;
+}
+
+.footer {
+    text-align: center;
+    padding: 3rem !important;
+}
+
+.footer > div > p {
+    font-size: 18px;
+}
+
+.main-sect {
+    padding: 2rem;
+    background-color: white;
+    color: black;
+}
