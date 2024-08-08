@@ -37,7 +37,6 @@ def gen_frames():
             text_color = (217, 10, 10)
 
         cv2.putText(frame_1, "LIVE STATUS: {}".format(detection_status), (10, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, text_color, 2)
-        cv2.putText(frame_1, "Press Spacebar to Exit!", (10, 90), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 255, 0), 2)
 
         # Encode frame as JPEG
         ret, buffer = cv2.imencode('.jpg', frame_1)

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Object Identification Feed{% endblock %}
+
+{% block content %}
+<section class="main-sect">
+    <div class="card">
+        <div class="card-content">
+            <div class="content">
+                Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec
+                id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus
+                et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis
+                consectetur purus sit amet fermentum.
+            </div>
+        </div>
+    </div>
+
+    <!-- Grid Layout for Webcam and Motion Detection Feeds -->
+    <div class="container">
+        <div class="columns">
+            <!-- Identification Feed Container -->
+            <div class="column">
+                <div class="box">
+                    <h4 class="title is-4">Object Identification Feed</h4>
+                    <a href="{% url 'identify_feed' %}">fullscreen</a>
+                    <img id="identify-feed" src="{% url 'identify_feed' %}" alt="Identify Feed" class="image is-16by9">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
