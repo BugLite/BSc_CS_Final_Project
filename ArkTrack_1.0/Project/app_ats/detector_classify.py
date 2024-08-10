@@ -6,7 +6,7 @@ model = YOLO('yolov8n.pt')
 
 # Function to generate frames with motion detection
 def gen_identify_frames():
-    camera = cv2.VideoCapture(0)  # Use webcam
+    camera = cv2.VideoCapture("/Users/oxon/Downloads/testvideo.mp4")  # Use webcam
 
     detected_objects = []  # List to store detected objects and their confidences
 
