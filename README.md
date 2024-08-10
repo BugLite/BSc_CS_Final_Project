@@ -19,3 +19,7 @@ Superuser:
 Yolo.v8 Memory Effect:
     Integration of Yolov8 on my cpu and memory surged from 330 MBs to 983MBs.
     Requires a powerful GPU for more effecient Real-Time processing.
+
+
+#Potential Issues
+    Reload issues - Server does not respond. Timeout issue
