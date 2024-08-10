@@ -9,7 +9,7 @@ Requirements:
     Django: 5.0.7
     numpy: 2.0.1
     opencv-python: 4.10.0.84
-
+    ultralytics: 8.2.74
 Superuser:
     username: haider
     password: 12345
