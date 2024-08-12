@@ -25,9 +25,9 @@ The following screenshots effectively demonstrate the spikes before-after integr
 There is a recorded spike in the following when using ffmpeg framework:
 * Video Recording Length (maximum): 20s
 * Video Playback Speed (1.25x)
-3. Memory
-4. GPU
-5. CPU
+1. Memory
+2. GPU
+3. CPU
 
 #### > ffmpeg CPU
 ![ffmpeg-CPU](/Support%20Docs/Development%20Documents/Problem%20Logs/ffmpeg%20CPU.png)
@@ -40,7 +40,7 @@ There is a recorded spike in the following when using ffmpeg framework:
 #### > cv2.VideoWriter CPU
 ![opencv-CPU](/Support%20Docs/Development%20Documents/Problem%20Logs/OpenCV-video%20CPU.png)
 
-#### > ffmpeg Memory 
+#### > cv2.VideoWriter Memory 
 ![opencv-Memory](/Support%20Docs/Development%20Documents/Problem%20Logs/OpenCV-video%20Memory.png)
 
 This is computationally less expensive compared to ffmpeg.
