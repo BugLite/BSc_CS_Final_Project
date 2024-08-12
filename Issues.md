@@ -35,6 +35,16 @@ There is a recorded spike in the following when using ffmpeg framework:
 #### > ffmpeg Memory 
 ![ffmpeg-Memory](/Support%20Docs/Development%20Documents/Problem%20Logs/ffmpeg%20Memory.png)
 
+### 2. OpenCv Built-in Video Writer Integration
+#### Description:
+#### > cv2.VideoWriter CPU
+![opencv-CPU](/Support%20Docs/Development%20Documents/Problem%20Logs/OpenCV-video%20CPU.png)
+
+#### > ffmpeg Memory 
+![opencv-Memory](/Support%20Docs/Development%20Documents/Problem%20Logs/OpenCV-video%20Memory.png)
+
+This is computationally less expensive compared to ffmpeg.
+
 ### 3. Server Timeout Issue
 #### Description
 At repeated reload's the Server sometimes timeout and does not respond. 
