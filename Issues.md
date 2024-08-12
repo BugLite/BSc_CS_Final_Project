@@ -1,4 +1,9 @@
 ## Development Issues
+
+### Idle CPU
+![System CPU Idle](/Users/oxon/Documents/FP_Systemlogs/System CPU Idle.png)
+
+
 ### 1. Yolo.v8n Model Integration
 #### Description: 
 Activation of Yolo.v8n model caused a significant spike in the following:
@@ -8,6 +13,7 @@ Activation of Yolo.v8n model caused a significant spike in the following:
 4. CPU
 
 The following screenshots effectively demonstrate the spikes before-after integration.
+
 
 ### 2. FFMPEG Integration
 #### Description:
