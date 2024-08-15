@@ -1,6 +1,5 @@
 import cv2
 import time
-import numpy as np
 import os
 
 # Define the directory where you want to save the recordings
@@ -22,9 +21,9 @@ def gen_frames():
     max_recording_duration = 20  # Recording duration in seconds
     min_motion_duration = 2  # Minimum motion duration to start recording
 
-    frames_list = []
     video_writer = None
     video_file_name = None
+    detected_area = None
 
     while camera.isOpened():
         check, frame_1 = camera.read()
@@ -32,6 +31,12 @@ def gen_frames():
 
         if not check:
             break
+
+        # Get the dimensions of the frame
+        height, width, _ = frame_1.shape
+
+        # Define the center points to divide the frame into four parts
+        center_x, center_y = width // 2, height // 2
 
         frame_diff = cv2.absdiff(frame_1, frame_2)
         grayscale = cv2.cvtColor(frame_diff, cv2.COLOR_BGR2GRAY)
@@ -49,6 +54,16 @@ def gen_frames():
             cv2.rectangle(frame_1, (x, y), (x+w, y+h), (0, 0, 255), 2)
             is_motion_detected = True
 
+            # Determine the quadrant
+            if x < center_x and y < center_y:
+                detected_area = "Top Left"
+            elif x >= center_x and y < center_y:
+                detected_area = "Top Right"
+            elif x < center_x and y >= center_y:
+                detected_area = "Bottom Left"
+            elif x == center_x and y == center_y:
+                detected_area = "Center"
+
         if is_motion_detected:
             if not motion_detected:
                 motion_detected = True
@@ -61,11 +76,19 @@ def gen_frames():
                 print(f"Recording started: {video_file_name}")
                 
                 # Initialize VideoWriter
-                height, width, _ = frame_1.shape
                 video_writer = cv2.VideoWriter(video_file_name, cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
         else:
             motion_detected = False
             motion_start_time = None
+
+        detection_status = f"MOTION DETECTED in {detected_area}" if is_motion_detected else "STABLE"
+
+        # Draw the detection status at the top-left corner
+        cv2.putText(frame_1, f"STATUS: {detection_status}", (10, 30), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
+
+        # Draw the quadrant lines
+        cv2.line(frame_1, (center_x, 0), (center_x, height), (255, 255, 255), 1)
+        cv2.line(frame_1, (0, center_y), (width, center_y), (255, 255, 255), 1)
 
         # Store frames if recording
         if recording:
@@ -78,10 +101,7 @@ def gen_frames():
                 video_writer.release()
                 video_writer = None
 
-        detection_status = "MOTION DETECTED" if is_motion_detected else "STABLE"
-        cv2.putText(frame_1, f"STATUS: {detection_status}", (10, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
-
-        # Encode frame as JPEG
+        # Encode frame as JPEG for streaming
         ret, buffer = cv2.imencode('.jpg', frame_1)
         frame = buffer.tobytes()
 
@@ -90,4 +110,3 @@ def gen_frames():
 
     camera.release()
     cv2.destroyAllWindows()
-
