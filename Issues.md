@@ -49,3 +49,9 @@ This is computationally less expensive compared to ffmpeg.
 #### Description
 At repeated reload's the Server sometimes timeout and does not respond. 
 The server is currently hosted at http://127.0.0.1:8000/
+
+
+### 4. Video Upload Error
+#### Description
+During the day, i was successful in automating the upload of the video and meta data to the dashboard.html page,
+with dynamic uploads. However, the videos did not play.
