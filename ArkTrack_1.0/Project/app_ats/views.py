@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponse
 from django.http import StreamingHttpResponse
-# from .detector_main import gen_frames
+from .detector_main import gen_frames
 
-from .detector_main_2 import gen_frames
+# from .detector_main_2 import gen_frames
 
 from .detector_sub import generate_motion_frames
 from .detector_classify import gen_identify_frames
