@@ -1,9 +1,13 @@
 import cv2
 import time
 import os
+from datetime import timedelta
+from django.utils.timezone import now
+from app_ats.models import RecordedVideo
+from django.conf import settings
 
 # Define the directory where you want to save the recordings
-save_directory = "/Users/oxon/Documents/ArkTrack System/Recordings"
+save_directory = os.path.join(settings.MEDIA_ROOT, 'recordings')
 os.makedirs(save_directory, exist_ok=True)
 
 # Track recording count
@@ -98,10 +102,17 @@ def gen_frames():
             if time.time() - recording_start_time >= max_recording_duration:
                 recording = False
                 print(f"Recording stopped: {video_file_name}")
-                video_writer.release()
-                video_writer = None
+                # Save video metadata to the database
+                RecordedVideo.objects.create(
+                    title=os.path.basename(video_file_name),
+                    # file path is relative to 'MEDIA_ROOT' in Database
+                    file_path=os.path.relpath(video_file_name, start=settings.MEDIA_ROOT),
+                    duration=timedelta(seconds=max_recording_duration),
+                    recorded_timestamp=now()
+                )
+                print(f"Video saved and metadata stored: {video_file_name}")
 
-        # Encode frame as JPEG for streaming
+        # Encode frame as JPEG
         ret, buffer = cv2.imencode('.jpg', frame_1)
         frame = buffer.tobytes()
 
