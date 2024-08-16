@@ -11,4 +11,6 @@ urlpatterns = [
 
     path('motion_detector/', views.display_motion_detector, name='display_motion_detector'),
     path('motion_detector_feed/', views.motion_detector_view, name='motion_detector_feed'),
+
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]

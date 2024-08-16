@@ -3,9 +3,13 @@ import time
 import ffmpeg
 import numpy as np
 import os
+from datetime import timedelta
+from django.utils.timezone import now
+from app_ats.models import RecordedVideo
+from django.conf import settings
 
 # Define the directory where you want to save the recordings
-save_directory = "/Users/oxon/Documents/ArkTrack System/Recordings"
+save_directory = os.path.join(settings.MEDIA_ROOT, 'recordings')
 os.makedirs(save_directory, exist_ok=True)
 
 # Track recording count
@@ -104,8 +108,15 @@ def gen_frames():
                 out.run(input=np.concatenate(frames_list, axis=0).tobytes())
                 frames_list = []
 
-        # detection_status = "MOTION DETECTED" if is_motion_detected else "STABLE"
-        # cv2.putText(frame_1, f"STATUS: {detection_status}", (10, 60), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
+                # Save video metadata to the database
+                RecordedVideo.objects.create(
+                    title=os.path.basename(video_file_name),
+                    # file path is relative to 'MEDIA_ROOT' in Database
+                    file_path=os.path.relpath(video_file_name, start=settings.MEDIA_ROOT),
+                    duration=timedelta(seconds=max_recording_duration),
+                    recorded_timestamp=now()
+                )
+                print(f"Video saved and metadata stored: {video_file_name}")
 
         # Encode frame as JPEG
         ret, buffer = cv2.imencode('.jpg', frame_1)

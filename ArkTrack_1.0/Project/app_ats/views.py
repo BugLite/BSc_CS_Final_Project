@@ -7,6 +7,17 @@ from .detector_main import gen_frames
 from .detector_sub import generate_motion_frames
 from .detector_classify import gen_identify_frames
 
+from .models import RecordedVideo
+from django.conf import settings
+
+# dashboard media request function
+def dashboard(request):
+    videos = RecordedVideo.objects.all().order_by('-recorded_timestamp')
+    return render(request, 'dashboard.html', {
+        'videos': videos,
+        'MEDIA_URL': settings.MEDIA_URL,
+    })
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')

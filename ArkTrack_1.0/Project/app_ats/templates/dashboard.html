@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Video Dashboard</h1>
+        <div class="row">
+            {% for video in videos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <video width="100%" controls>
+                            <source src="{{ MEDIA_URL }}{{ video.file_path }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ video.title }}</h5>
+                            <p class="card-text">
+                                Duration: {{ video.duration }}<br>
+                                Recorded on: {{ video.recorded_timestamp }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
