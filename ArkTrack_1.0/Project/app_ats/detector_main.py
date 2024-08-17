@@ -7,6 +7,7 @@ from datetime import timedelta
 from django.utils.timezone import now
 from app_ats.models import RecordedVideo
 from django.conf import settings
+from django.core.mail import send_mail
 
 # Define the directory where you want to save the recordings
 save_directory = os.path.join(settings.MEDIA_ROOT, 'recordings')
@@ -109,7 +110,7 @@ def gen_frames():
                 frames_list = []
 
                 # Save video metadata to the database
-                RecordedVideo.objects.create(
+                captured_video = RecordedVideo.objects.create(
                     title=os.path.basename(video_file_name),
                     # file path is relative to 'MEDIA_ROOT' in Database
                     file_path=os.path.relpath(video_file_name, start=settings.MEDIA_ROOT),
@@ -117,6 +118,16 @@ def gen_frames():
                     recorded_timestamp=now()
                 )
                 print(f"Video saved and metadata stored: {video_file_name}")
+
+                # Send an email notification
+                send_mail(
+                    subject='Motion Detected',
+                    message=f"Motion Detected\nRecording Title: {captured_video.title}\nTimestamp: {captured_video.recorded_timestamp}",
+                    from_email=settings.EMAIL_HOST_USER,
+                    recipient_list=['hyder.devop@gmail.com'],
+                    fail_silently=False,
+                )
+                print("Email notification sent.")
 
         # Encode frame as JPEG
         ret, buffer = cv2.imencode('.jpg', frame_1)
