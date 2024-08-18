@@ -53,7 +53,5 @@ The server is currently hosted at http://127.0.0.1:8000/
 
 ### 4. Video Upload Error
 #### Description
-During the day, i was successful in automating the upload of the video and meta data to the dashboard.html page,
-with dynamic uploads. However, the videos did not play.
-
-Solved: The problem was the encoding of the video using open-cv Built in videowriter. The browser did not support the video format, therefore we have to use ffmpeg at the cost of computational resources. 
+`[Solved]` The Problem occured due to incorrect encoding of video files during recording using Opencv-VideoWriter module. 
+Reverting back to ffmpeg-python for video capture/encoding resolved the issue.
