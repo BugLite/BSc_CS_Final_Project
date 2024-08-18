@@ -7,15 +7,23 @@ from datetime import timedelta
 from django.utils.timezone import now
 from app_ats.models import RecordedVideo
 from django.conf import settings
-from django.core.mail import send_mail
 
-# Define the directory where you want to save the recordings
-save_directory = os.path.join(settings.MEDIA_ROOT, 'recordings')
-os.makedirs(save_directory, exist_ok=True)
+from app_ats.alerts import send_alert_mail
 
-# Track recording count
+
+# ------------------------------------------------------------------- 
+# script.py > script.py (functions) > views.py > urls.py > web.html
+# -------------------------------------------------------------------
+
+
+# `records_dir` sets up path for storing recorded motion in the media/recordings directory.
+records_dir = os.path.join(settings.MEDIA_ROOT, 'recordings')
+os.makedirs(records_dir, exist_ok=True)
+
+# Track recording count for titling videos
 recording_count = 1
 
+# Primary Motion Detection Function
 def gen_frames():
     global recording_count
     camera = cv2.VideoCapture(0)  # Use webcam
@@ -78,7 +86,7 @@ def gen_frames():
             elif time.time() - motion_start_time >= min_motion_duration and not recording:
                 recording = True
                 recording_start_time = time.time()
-                video_file_name = os.path.join(save_directory, f'recording_{recording_count}.mp4')
+                video_file_name = os.path.join(records_dir, f'recording_{recording_count}.mp4')
                 recording_count += 1
                 print(f"Recording started: {video_file_name}")
         else:
@@ -119,15 +127,7 @@ def gen_frames():
                 )
                 print(f"Video saved and metadata stored: {video_file_name}")
 
-                # Send an email notification
-                send_mail(
-                    subject='Motion Detected',
-                    message=f"Motion Detected\nRecording Title: {captured_video.title}\nTimestamp: {captured_video.recorded_timestamp}",
-                    from_email=settings.EMAIL_HOST_USER,
-                    recipient_list=['hyder.devop@gmail.com'],
-                    fail_silently=False,
-                )
-                print("Email notification sent.")
+                send_alert_mail(captured_video)
 
         # Encode frame as JPEG
         ret, buffer = cv2.imencode('.jpg', frame_1)
