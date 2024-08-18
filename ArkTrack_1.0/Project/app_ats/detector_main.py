@@ -1,15 +1,6 @@
 import cv2
 import time
-import ffmpeg
-import numpy as np
-import os
-from datetime import timedelta
-from django.utils.timezone import now
-from app_ats.models import RecordedVideo
-from django.conf import settings
-
 from app_ats.motion_recorder import record_videos
-
 from app_ats.alerts import send_alert_mail
 
 
@@ -18,20 +9,16 @@ from app_ats.alerts import send_alert_mail
 # -------------------------------------------------------------------
 
 
-# `records_dir` sets up path for storing recorded motion in the media/recordings directory.
-records_dir = os.path.join(settings.MEDIA_ROOT, 'recordings')
-os.makedirs(records_dir, exist_ok=True)
-
 # Track recording count for titling videos
-recording_count = 1
+recording_id = 1
 
-# Primary Motion Detection Function
+# Primary motion detection function
 def gen_frames():
-    global recording_count
+    global recording_id
     camera = cv2.VideoCapture(0)  # Use webcam
 
     # Variables for motion detection and recording
-    motion_detected = False
+    motion_spotted = False
     motion_start_time = None
     recording = False
     recording_start_time = None
@@ -39,7 +26,6 @@ def gen_frames():
     min_motion_duration = 2  # Minimum motion duration to start recording
 
     frames_list = []
-    video_file_name = None
     detected_area = None
 
     while camera.isOpened():
@@ -82,17 +68,16 @@ def gen_frames():
                 detected_area = "Center"
 
         if is_motion_detected:
-            if not motion_detected:
-                motion_detected = True
+            if not motion_spotted:
+                motion_spotted = True
                 motion_start_time = time.time()
             elif time.time() - motion_start_time >= min_motion_duration and not recording:
                 recording = True
                 recording_start_time = time.time()
-                video_file_name = os.path.join(records_dir, f'recording_{recording_count}.mp4')
-                recording_count += 1
-                print(f"Recording started: {video_file_name}")
+                frames_list = []
+                print(f"Recording started")
         else:
-            motion_detected = False
+            motion_spotted = False
             motion_start_time = None
 
         detection_status = f"MOTION DETECTED in {detected_area}" if is_motion_detected else "STABLE"
@@ -111,10 +96,13 @@ def gen_frames():
             # Stop recording after max_recording_duration seconds
             if time.time() - recording_start_time >= max_recording_duration:
                 recording = False
-                print(f"Recording stopped: {video_file_name}")
+                print(f"Recording stopped")
 
-                captured_video = record_videos(frames_list, recording_count, frame_1.shape, max_recording_duration)
-                recording_count += 1
+                # function to capture/record videos
+                captured_video = record_videos(frames_list, recording_id, frame_1.shape, max_recording_duration)
+                recording_id += 1
+
+                # function to send email
                 send_alert_mail(captured_video)
 
         # Encode frame as JPEG

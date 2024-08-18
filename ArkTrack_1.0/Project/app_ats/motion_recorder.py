@@ -20,11 +20,11 @@ def record_videos(frames_list, video_id, frame_shape, max_duration):
     
     # Save video metadata to the database
     captured_video = RecordedVideo.objects.create(
-        title=os.path.basename(video_title),
+        title = os.path.basename(video_title),
         # file path is relative to 'MEDIA_ROOT' in Database
-        file_path=os.path.relpath(video_title, start=settings.MEDIA_ROOT),
-        duration=timedelta(seconds=max_duration),
-        recorded_timestamp=now()
+        file_path = os.path.relpath(video_title, start=settings.MEDIA_ROOT),
+        duration = timedelta(seconds=max_duration),
+        recorded_timestamp = now()
     )
     print(f"Video saved and metadata stored: {video_title}")
 
