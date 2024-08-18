@@ -3,6 +3,45 @@
 {% block title %}Home - My Project{% endblock %}
 
 {% block content %}
+
+{% load static %}
+
+    <!-- Navbar -->
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item logo-static" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.svg' %}" alt="Logo" width="140" height="40">
+            </a>
+            <!-- Placeholder for current time -->
+            <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
+                <span id="current-time"></span>
+            </div>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="{% url 'intelisense' %}">
+                    <img src="{% static 'images/user-check-solid-24.png' %}" width="25"> InteliSense
+                </a>
+                <a class="navbar-item" href="{% url 'dashboard' %}">
+                    <img src="{% static 'images/shield-quarter-regular-24.png' %}" width="18"> Dashboard
+                </a>
+                <a class="navbar-item" href="report">
+                    <img src="{% static 'images/bell-ring-solid-24.png' %}" width="20"> Report
+                </a>
+                <a class="navbar-item" href="help">
+                    <img src="{% static 'images/help-circle-24.png' %}" width="20"> Help
+                </a>
+              </div>
+        </div>
+    </nav>
+
     <section class="main-sect">
         <div class="card">
             <div class="card-content">
@@ -22,8 +61,8 @@
                 <div class="column is-half">
                     <div class="box">
                         <h4 class="title is-4">Webcam Feed</h4>
-                        <a href="/webcam_feed">fullscreen</a>
-                        <img id="webcam-feed" src="{% url 'webcam_feed' %}" alt="Webcam Feed" class="image is-16by9">
+                        <a href="/tracker-main">fullscreen</a>
+                        <img id="webcam-feed" src="{% url 'main_feed' %}" alt="Webcam Feed" class="image is-16by9">
                     </div>
                 </div>
 
@@ -31,8 +70,8 @@
                 <div class="column is-half">
                     <div class="box">
                         <h4 class="title is-4">Motion Detector Feed</h4>
-                        <a href="/motion_detector_feed">fullscreen</a>
-                        <img id="motion-detection-feed" src="{% url 'motion_detector_feed' %}" alt="Motion Detection Feed" class="image is-16by9">
+                        <a href="/tracker-sub">fullscreen</a>
+                        <img id="motion-detection-feed" src="{% url 'sub_feed' %}" alt="Motion Detection Feed" class="image is-16by9">
                     </div>
                 </div>
             </div>

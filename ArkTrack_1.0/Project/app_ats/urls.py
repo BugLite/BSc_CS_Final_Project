@@ -1,16 +1,15 @@
 from django.urls import path
 from . import views
 
+# Reference
+# {% url 'name = ' %}
+# href = /pathname
+
 urlpatterns = [
-    path('', views.home, name="home"), 
-    path('webcam/', views.display_webcam, name='display_webcam'),
-    path('webcam_feed/', views.webcam_feed, name='webcam_feed'),
-
-    path('motion_identify/', views.identify_feed, name='identify_feed'),
-    path('motion_identify_feed/', views.display_identify_detector, name='display_identify_feed'),
-
-    path('motion_detector/', views.display_motion_detector, name='display_motion_detector'),
-    path('motion_detector_feed/', views.motion_detector_view, name='motion_detector_feed'),
-
-    path('dashboard/', views.dashboard, name='dashboard'),
+    path('', views.home, name="home"), # -- homepage --
+    path('tracker-main/', views.webcam_feed, name='main_feed'), #(main)tracker 
+    path('tracker-sub/', views.motion_detector_view, name='sub_feed'), #(sub)tracker
+    path('dashboard/', views.dashboard, name='dashboard'), # -- dashboard page --
+    path('intelisense/', views.display_identify_detector, name='intelisense'), # -- intelisense page --
+    path('tracker-intelisense/', views.identify_feed, name='intelisense_feed'), #(intel)tracker
 ]
