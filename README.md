@@ -6,7 +6,6 @@ It has been developed under the Final Project (3070) module for Term April-Septe
 The project ARKTRACE SYSTEM © is a cost-effective home security and surveillance system designed to meet the needs of home-owners
 concerned about the security of their property and family.
 
-
 ## Requirements
     virtual-env: myenv #conda activate myenv
     Django: 5.0.7
@@ -17,3 +16,5 @@ concerned about the security of their property and family.
 ## Django SuperUser
     username: haider
     password: 12345
+
+### script.py > script.py (functions) > views.py > urls.py > web.html
