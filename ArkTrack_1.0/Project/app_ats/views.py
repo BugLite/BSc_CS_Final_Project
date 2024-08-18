@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from django.http import StreamingHttpResponse
 from .detector_main import gen_frames
 
