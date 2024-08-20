@@ -12,7 +12,7 @@ recording_id = 1
 model = YOLO('yolov8n.pt')
 
 # primary motion detection function
-def gen_frames(intelisense_enabled = False):
+def gen_frames(intellisense_active = False):
     global recording_id
     camera = cv2.VideoCapture(0)  # Webcam initialised
 
@@ -57,7 +57,7 @@ def gen_frames(intelisense_enabled = False):
             x, y, w, h = cv2.boundingRect(contour)
             is_motion_detected = True #set flag to True when signficant movement detected
             
-            if intelisense_enabled:
+            if intellisense_active:
                 # specify the area of motion for model
                 motion_area = frame_1[y:y+h, x:x+w]
                 # run the model on the motion area only

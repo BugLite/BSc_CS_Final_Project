@@ -13,7 +13,8 @@ from .models import RecordedVideo
 
 # streaming functions to browers or client
 def webcam_feed(request):
-    return StreamingHttpResponse(gen_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
+    intellisense_active = request.session.get('intellisense_active', False)
+    return StreamingHttpResponse(gen_frames(intellisense_active=intellisense_active), content_type='multipart/x-mixed-replace; boundary=frame')
 
 def identify_feed(request):
     return StreamingHttpResponse(gen_identify_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
@@ -24,7 +25,11 @@ def motion_detector_view(request):
 
 # rendering webpage html url
 def home(request):
-    return render(request, 'home.html')
+    if request.method == "POST":
+        request.session['intellisense_active'] = 'intellisense_active' in request.POST
+    intellisense_active = request.session.get('intellisense_active', False)
+    return render(request, 'home.html', {'intellisense_active': intellisense_active})
+
 
 def display_webcam(request):
     return render(request, 'webcam.html')

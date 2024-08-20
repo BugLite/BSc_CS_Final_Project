@@ -60,6 +60,14 @@
                 <!-- Webcam Feed Container -->
                 <div class="column is-half">
                     <div class="box">
+                        
+                        <form method="POST" id="toggleForm">
+                            {% csrf_token %}
+                            <label for="intellisenseToggle">Enable Intellisense</label>
+                            <input type="checkbox" id="intellisenseToggle" name="intellisense_active" {% if intellisense_active %} checked {% endif %}>
+                            <button type="submit">Apply</button>
+                        </form>
+
                         <h4 class="title is-4">Webcam Feed</h4>
                         <a href="/tracker-main">fullscreen</a>
                         <img id="webcam-feed" src="{% url 'main_feed' %}" alt="Webcam Feed" class="image is-16by9">
