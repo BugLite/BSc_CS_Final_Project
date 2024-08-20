@@ -27,6 +27,8 @@ def gen_frames(intellisense_active = False):
 
     # store model classification and confidence
     object_detected = []
+
+    frame_rate = camera.get(cv2.CAP_PROP_FPS) or 30
     
     # capture frames for comparison (ret1/ret2)
     while camera.isOpened():
@@ -126,7 +128,7 @@ def gen_frames(intellisense_active = False):
                 print(f"Recording stopped")
 
                 # save the recording as 'captured_video'
-                captured_video = record_videos(frames_list, recording_id, frame_1.shape, max_recording_duration)
+                captured_video = record_videos(frames_list, recording_id, frame_1.shape, max_recording_duration, frame_rate)
                 recording_id += 1
 
                 # notify user via an alert email

@@ -6,7 +6,6 @@ from django.conf import settings
 # tracker functions import
 from .tracker_A import gen_frames
 from .tracker_B import generate_motion_frames
-from .tracker_C import gen_identify_frames
 
 # database model import
 from .models import RecordedVideo
@@ -15,9 +14,6 @@ from .models import RecordedVideo
 def webcam_feed(request):
     intellisense_active = request.session.get('intellisense_active', False)
     return StreamingHttpResponse(gen_frames(intellisense_active=intellisense_active), content_type='multipart/x-mixed-replace; boundary=frame')
-
-def identify_feed(request):
-    return StreamingHttpResponse(gen_identify_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
 
 def motion_detector_view(request):
     return StreamingHttpResponse(generate_motion_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
@@ -30,15 +26,11 @@ def home(request):
     intellisense_active = request.session.get('intellisense_active', False)
     return render(request, 'home.html', {'intellisense_active': intellisense_active})
 
-
 def display_webcam(request):
     return render(request, 'webcam.html')
 
 def display_motion_detector(request):
     return render(request, 'motion_detector.html')
-
-def display_identify_detector(request):
-    return render(request, 'identify.html')
 
 # dashboard media request function
 def dashboard(request):
