@@ -14,8 +14,8 @@ def gen_frames():
     camera = cv2.VideoCapture(0)  # Webcam initialised
 
     # motion detection/recording settings
-    min_motion_duration = 2  # Minimum duration of detected movement to trigger recording (2 seconds)
-    max_recording_duration = 20  # Maximum duration for each recording (20 seconds)
+    min_motion_duration = 2  # minimum duration of detected movement to trigger recording (2 seconds)
+    max_recording_duration = 20  # maximum duration for each recording (20 seconds)
 
     motion_spotted = False
     motion_start_time = None
