@@ -2,9 +2,9 @@
 import cv2
 import time
 from ultralytics import YOLO
-from app_ats.spit_screen import identifyArea, drawLines
-from app_ats.motion_recorder import record_videos
-from app_ats.alerts import send_alert_mail
+from app_ats.quadrant import identifyArea, drawLines
+from app_ats.recorder import record_videos
+from app_ats.notify import send_alert_mail
 
 # recording count for video IDs
 recording_id = 1
