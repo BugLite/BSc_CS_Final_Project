@@ -52,7 +52,6 @@
         </div>
 
         <!-- Grid Layout for Webcam and Motion Detection Feeds -->
-        <div class="container">
             <div class="columns">
                 <!-- Webcam Feed Container -->
                 <div class="column is-half">
@@ -81,5 +80,15 @@
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="columns is-fullwidth">
+                <div class="column">
+                    <div class="box">
+                        <h4 class="title is-4">Camera Feed</h4>
+                        <a href="/camera-main">fullscreen</a>
+                        <img id="camera-feed" src="{% url 'camera_feed' %}" alt="Camera Feed" class="image is-16by9">
+                    </div>
+                </div>
+            </div>
     </section>
 {% endblock %}

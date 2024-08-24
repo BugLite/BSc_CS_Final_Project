@@ -6,6 +6,7 @@ from django.conf import settings
 # tracker functions import
 from .tracker_A import gen_frames
 from .tracker_B import generate_motion_frames
+from .camera import camera
 
 # database model import
 from .models import RecordedVideo
@@ -17,6 +18,9 @@ def webcam_feed(request):
 
 def motion_detector_view(request):
     return StreamingHttpResponse(generate_motion_frames(), content_type='multipart/x-mixed-replace; boundary=frame')
+
+def camera_feed(request):
+    return StreamingHttpResponse(camera(), content_type='multipart/x-mixed-replace; boundary=frame')
 
 
 # rendering webpage html url

@@ -7,6 +7,8 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name="home"), # -- homepage --
+
+    path('camera-main/', views.camera_feed, name='camera_feed'), #camera feed 
     
     path('tracker-main/', views.webcam_feed, name='main_feed'), #(main)tracker 
 
