@@ -1,6 +1,6 @@
 # django utilities import
 from django.http import StreamingHttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 
 # tracker functions import
@@ -10,6 +10,9 @@ from .camera import camera
 
 # database model import
 from .models import RecordedVideo
+
+# helper functions
+from .delete import delete_video_by_title
 
 # streaming functions to browers or client
 def webcam_feed(request):
@@ -43,3 +46,8 @@ def dashboard(request):
         'videos': videos,
         'MEDIA_URL': settings.MEDIA_URL,
     })
+
+def delete_video(request, video_title):
+    if request.method == 'POST':
+        delete_video_by_title(video_title)
+    return redirect('dashboard')

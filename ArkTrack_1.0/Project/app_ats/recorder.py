@@ -10,7 +10,7 @@ def record_videos(frames_list, video_id, frame_shape, max_duration, frame_rate):
     records_dir = os.path.join(settings.MEDIA_ROOT, 'recordings')
     os.makedirs(records_dir, exist_ok=True)
 
-    video_title = os.path.join(records_dir, f'recording_id({video_id}).mp4')
+    video_title = os.path.join(records_dir, f'recording_{video_id}.mp4')
 
     # Prepare the frames for ffmpeg
     frames_array = np.array(frames_list)

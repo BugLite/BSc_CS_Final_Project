@@ -15,4 +15,7 @@ urlpatterns = [
     path('tracker-sub/', views.motion_detector_view, name='sub_feed'), #(sub)tracker
 
     path('dashboard/', views.dashboard, name='dashboard'), # -- dashboard page --
+
+    path('delete_video/<str:video_title>/', views.delete_video, name='delete_video'),
+
 ]

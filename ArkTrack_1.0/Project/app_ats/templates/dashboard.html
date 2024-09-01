@@ -57,6 +57,11 @@
                                 Duration: {{ video.duration }}<br>
                                 Recorded on: {{ video.recorded_timestamp }}
                             </p>
+                            <!-- Delete button -->
+                            <form action="{% url 'delete_video' video.title %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>
