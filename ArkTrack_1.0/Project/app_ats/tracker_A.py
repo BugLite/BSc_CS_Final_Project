@@ -8,38 +8,44 @@ from app_ats.notify import send_email_alert
 
 # recording count for video IDs
 recording_id = 1
-# load the Yolov8(n) model for Object Classification
+# loading the Yolov8(n) - nano model for Object Classification task
 model = YOLO('yolov8n.pt')
 
-# primary motion detection function
+# primary motion detection (frame-differencing) function
 def gen_frames(intellisense_active = False):
+    """
+    The `gen_frames` function is the primariy surveillance architecture, that runs an effective frame diffencing and object 
+    classification model. The function runs the Object Classification model (referred to as 'IntelliSense') only when the User enables
+    it on their system. The Tracker A script furthermore, integrates several core functionalities from the project including the email
+    and video recording functions and integrates them to create an optimized, clean and modular surveillance system. 
+    """
+
     global recording_id
     camera = cv2.VideoCapture(0)  # Webcam initialised
 
     # motion detection/recording settings
-    min_motion_duration = 2  # minimum duration of detected movement to trigger recording (2 seconds)
-    max_recording_duration = 20  # maximum duration for each recording (20 seconds)
-
+    min_motion_duration = 2  
+    max_recording_duration = 20
     motion_spotted = False
     motion_start_time = None
     recording = False
     frames_list = []
 
-    # store model classification and confidence
+    # store model classification and confidence metrics
     object_detected = []
-
-    frame_rate = camera.get(cv2.CAP_PROP_FPS) or 30
+    # defined frame rate
+    frame_rate = 20
     
-    # capture frames for comparison (ret1/ret2)
+    # capturing frames for comparison (ret1/ret2)
     while camera.isOpened():
         ret1, frame_1 = camera.read()
         ret2, frame_2 = camera.read()
 
-        # ensure frames read successfully
+        # verifying loop breaks if frames are not read successfully
         if not (ret1 and ret2):
             break
 
-        # apply frame differentiation algorithm
+        # applying frame differencing algorithm
         frame_diff = cv2.absdiff(frame_1, frame_2)
         grayscale = cv2.cvtColor(frame_diff, cv2.COLOR_BGR2GRAY)
         gaus_blur = cv2.GaussianBlur(grayscale, (5, 5), 0)
@@ -47,24 +53,25 @@ def gen_frames(intellisense_active = False):
         dilation = cv2.dilate(threshold, None, iterations=5)
         contours, _ = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-        # set up motion detection flag
+        # setting up motion detection checks
         new_object_detected = []
         is_motion_detected = False
-        screen_status = "STABLE" # default status signal
+        screen_status = "STABLE" # setting the default status signal
 
         for contour in contours:
-            if cv2.contourArea(contour) < 8000:
+            if cv2.contourArea(contour) < 8000: # defined threshold to determine movement intensity
                 continue
 
             x, y, w, h = cv2.boundingRect(contour)
-            is_motion_detected = True #set flag to True when signficant movement detected
+            is_motion_detected = True # setting flag to True when signficant movement detected
             
             if intellisense_active:
-                # specify the area of motion for model
+                # specifying the area of motion for model
                 motion_area = frame_1[y:y+h, x:x+w]
-                # run the model on the motion area only
+                # runing the model on the motion area only
                 results = model(motion_area)
-
+                
+                # Yolov8n model definition
                 for classification in results:
                     boxes = classification.boxes.xyxy.cpu().numpy()
                     confs = classification.boxes.conf.cpu().numpy()
@@ -98,43 +105,43 @@ def gen_frames(intellisense_active = False):
             motion_spotted = False
             motion_start_time = None
         
-        # Update detected objects if there are new detections
+        # updating the classified objects list if there are new detections
         if new_object_detected:
             object_detected = new_object_detected
         else:
-            # Keep the previous detected objects if no new detection
-            object_detected = object_detected[-10:]  # Limit to last 10 detections
+            # limiting the number of objects classifications in the array to 10
+            object_detected = object_detected[-10:]
         
-        # Display detected objects
-        y_offset = 80  # Starting y position for the text
+        # displaying the classified labels on screen
+        y_offset = 80
         for obj in object_detected:
             cv2.putText(frame_1, obj, (10, y_offset), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 0), 2)
             y_offset += 20
 
-        # draw quadrant lines on the frame for region identification
+        # drawing quadrant lines on the frame for region identification
         drawLines(frame_1)
 
-        # display the detection status on the frame
+        # displaying the detection status on the frame
         detection_status = f"MOTION DETECTED in {screen_status}" if is_motion_detected else "STABLE"
         cv2.putText(frame_1, f"STATUS: {detection_status}", (10, 30), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
 
-        # store frames if recording is activated
+        # storing the frames if recording is triggered
         if recording:
             frames_list.append(frame_1)
 
-            # disable recording after maximum recording duration reached
+            # disable recording once the maximum recording duration has been reached
             if time.time() - recording_start_time >= max_recording_duration:
                 recording = False
                 print(f"Recording stopped")
 
-                # save the recording as 'captured_video'
+                # saving the recording as 'captured_video'
                 captured_video = record_videos(frames_list, recording_id, frame_1.shape, max_recording_duration, frame_rate)
                 recording_id += 1
 
-                # notify user via an alert email
+                # notifying the user via an alert email
                 send_email_alert(captured_video)
 
-        # encode frame as JPEG format for streaming
+        # encode frame as JPEG format for web-based streaming
         ret, buffer = cv2.imencode('.jpg', frame_1)
         frame = buffer.tobytes()
 
