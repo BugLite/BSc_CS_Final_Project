@@ -4,7 +4,7 @@ import time
 from ultralytics import YOLO
 from app_ats.quadrant import identifyArea, drawLines
 from app_ats.recorder import record_videos
-from app_ats.notify import send_alert_mail
+from app_ats.notify import send_email_alert
 
 # recording count for video IDs
 recording_id = 1
@@ -132,7 +132,7 @@ def gen_frames(intellisense_active = False):
                 recording_id += 1
 
                 # notify user via an alert email
-                send_alert_mail(captured_video)
+                send_email_alert(captured_video)
 
         # encode frame as JPEG format for streaming
         ret, buffer = cv2.imencode('.jpg', frame_1)

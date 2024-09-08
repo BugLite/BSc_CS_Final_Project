@@ -1,21 +1,25 @@
 import cv2
-from app_ats.quadrant import drawLines
 
 def camera():
-    camera = cv2.VideoCapture(0)
-    print(f"Camera feed activated!")
-
+    """
+    Function `camera` provides web-based streaming capability for the surveillance system.
+    """
+    camera = cv2.VideoCapture(0) # initialising webcam 
+    
     while True:
-        check, frame = camera.read()
-
-        if not check:
+        # capturing video frames
+        captured, frame = camera.read() 
+    
+        # exit loop if frame not 'captured' successfully
+        if not captured:
             break
 
-        # Encode the frame as JPEG
+        # encoding the captured frames as JPEG images
         ret, buffer = cv2.imencode('.jpg', frame)
+        # converting the encoded JPEG images to bytes format
         frame = buffer.tobytes()
 
-        # Yield the frame as part of a streaming response
+        # yeilding the encoded frames for web-based streaming
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 

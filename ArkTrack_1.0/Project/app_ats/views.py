@@ -12,7 +12,7 @@ from .camera import camera
 from .models import RecordedVideo
 
 # helper functions
-from .delete import delete_video_by_title
+from .delete import delete_by_title
 
 # streaming functions to browers or client
 def webcam_feed(request):
@@ -49,5 +49,5 @@ def dashboard(request):
 
 def delete_video(request, video_title):
     if request.method == 'POST':
-        delete_video_by_title(video_title)
+        delete_by_title(video_title)
     return redirect('dashboard')
