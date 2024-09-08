@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - My Project{% endblock %}
+{% block title %}ArkTrack System | Dashboard{% endblock %}
 
 {% block content %}
 
@@ -29,10 +29,10 @@
                 <a class="navbar-item" href="{% url 'home' %}">
                     <img src="{% static 'images/bell-ring-solid-24.png' %}" width="18"> Home
                 </a>
-                <a class="navbar-item" href="report">
+                <a class="navbar-item" href="{% url 'report' %}">
                     <img src="{% static 'images/shield-quarter-regular-24.png' %}" width="20"> Report
                 </a>
-                <a class="navbar-item" href="help">
+                <a class="navbar-item" href="{% url 'help' %}">
                     <img src="{% static 'images/help-circle-24.png' %}" width="20"> Help
                 </a>
             </div>
@@ -54,13 +54,13 @@
                         <div class="content">
                             <h5 class="title is-5">{{ video.title }}</h5>
                             <p>
-                                Duration: {{ video.duration }}<br>
-                                Recorded on: {{ video.recorded_timestamp }}
+                                Recorded on: {{ video.recorded_timestamp }} <br>
+                                Duration: {{ video.duration }}
                             </p>
                             <!-- Delete button -->
                             <form action="{% url 'delete_video' video.title %}" method="POST" style="display:inline;">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="button is-danger">Delete</button>
                             </form>
                         </div>
                     </div>

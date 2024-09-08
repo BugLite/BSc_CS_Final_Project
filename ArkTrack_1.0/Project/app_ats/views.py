@@ -51,3 +51,9 @@ def delete_video(request, video_title):
     if request.method == 'POST':
         delete_by_title(video_title)
     return redirect('dashboard')
+
+def report(request):
+    return render(request, 'report.html')
+
+def support(request):
+    return render(request, 'help.html')

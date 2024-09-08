@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}ArkTrack System | Help{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+    <!-- Navbar -->
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item logo-static" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.svg' %}" alt="Logo" width="140" height="40">
+            </a>
+            <!-- Placeholder for current time -->
+            <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
+                <span id="current-time"></span>
+            </div>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="{% url 'home' %}">
+                    <img src="{% static 'images/bell-ring-solid-24.png' %}" width="18"> Home
+                </a>
+                <a class="navbar-item" href="{% url 'dashboard' %}">
+                    <img src="{% static 'images/shield-quarter-regular-24.png' %}" width="18"> Dashboard
+                </a>
+                <a class="navbar-item" href="{% url 'report' %}">
+                    <img src="{% static 'images/bell-ring-solid-24.png' %}" width="20"> Report
+                </a>
+            </div>
+        </div>
+    </nav>
+
+
+    <section>
+        <div class="container m-6">
+            <div class="content">
+                <h2 class="title is-3">How to Use the ArkTrack System</h2>
+                <p class="subtitle is-5">Follow these steps to get started with the ArkTrack System:</p>
+                
+                <ol class="is-clickable">
+                    <li>
+                        <h4 class="title is-4">Step 1: Log In</h4>
+                        <p>Visit the <a href="{% url 'home' %}" class="has-text-primary">Home</a> page and log in using your credentials. If you don't have an account, you can register from this page as well.</p>
+                    </li>
+                    <li>
+                        <h4 class="title is-4">Step 2: Set Up Your Security Preferences</h4>
+                        <p>Navigate to the <a href="{% url 'dashboard' %}" class="has-text-primary">Dashboard</a> to configure your security preferences. Set up the areas you want to monitor and adjust the sensitivity settings as needed.</p>
+                    </li>
+                    <li>
+                        <h4 class="title is-4">Step 3: Add Authorities</h4>
+                        <p>Go to the <a href="{% url 'help' %}" class="has-text-primary">Help</a> page and follow the instructions to add the authorities you want to alert in case of suspicious activity. Ensure their contact details are accurate.</p>
+                    </li>
+                    <li>
+                        <h4 class="title is-4">Step 4: Monitor Your System</h4>
+                        <p>Once your preferences are set, you can monitor live feeds and check recorded footage on the <a href="{% url 'dashboard' %}" class="has-text-primary">Dashboard</a>. Ensure that your system is functioning correctly by reviewing the logs and notifications.</p>
+                    </li>
+                    <li>
+                        <h4 class="title is-4">Step 5: Respond to Alerts</h4>
+                        <p>If an alert is triggered, you will receive a notification. Follow the instructions provided to respond promptly and ensure the security of your premises.</p>
+                    </li>
+                </ol>
+                
+                <p class="has-text-grey">For further assistance, visit the <a href="{% url 'help' %}" class="has-text-primary">Help</a> page or contact our support team.</p>
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

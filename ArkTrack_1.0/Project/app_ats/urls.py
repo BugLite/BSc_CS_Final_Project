@@ -15,4 +15,8 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'), # -- dashboard page --
 
     path('delete_video/<str:video_title>/', views.delete_video, name='delete_video'), # delete function
+
+    path('report/', views.report, name='report'), # -- report page --
+
+    path('help/', views.support, name='help'), # -- help page --
 ]

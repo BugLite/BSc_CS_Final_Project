@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}ArkTrack System | Report{% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+    <!-- Navbar -->
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item logo-static" href="{% url 'home' %}">
+                <img src="{% static 'images/logo.svg' %}" alt="Logo" width="140" height="40">
+            </a>
+            <!-- Placeholder for current time -->
+            <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
+                <span id="current-time"></span>
+            </div>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-end">
+                <a class="navbar-item" href="{% url 'home' %}">
+                    <img src="{% static 'images/bell-ring-solid-24.png' %}" width="18"> Home
+                </a>
+                <a class="navbar-item" href="{% url 'dashboard' %}">
+                    <img src="{% static 'images/shield-quarter-regular-24.png' %}" width="18"> Dashboard
+                </a>
+                <a class="navbar-item" href="{% url 'help' %}">
+                    <img src="{% static 'images/help-circle-24.png' %}" width="20"> Help
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Card -->
+    <div class="container m-6">
+        <div class="columns is-centered">
+            <div class="column is-half">
+                <div class="card has-background-white">
+                    <div class="card-content">
+                        <h3 class="title has-text-black">Alert Authorities</h3>
+                        <form id="alert-form">
+                            <div class="field">
+                                <label class="label has-text-black">Authority</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="authority" placeholder="Enter authority name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label has-text-black">Contact</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="contact" placeholder="Enter contact details">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label has-text-black">Message</label>
+                                <div class="control">
+                                    <textarea class="textarea" name="message" placeholder="Enter your message"></textarea>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-primary" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Home - My Project{% endblock %}
+{% block title %}ArkTrack System | Home{% endblock %}
 
 {% block content %}
 
@@ -29,10 +29,10 @@
                 <a class="navbar-item" href="{% url 'dashboard' %}">
                     <img src="{% static 'images/shield-quarter-regular-24.png' %}" width="18"> Dashboard
                 </a>
-                <a class="navbar-item" href="report">
+                <a class="navbar-item" href="{% url 'report' %}">
                     <img src="{% static 'images/bell-ring-solid-24.png' %}" width="20"> Report
                 </a>
-                <a class="navbar-item" href="help">
+                <a class="navbar-item" href="{% url 'help' %}">
                     <img src="{% static 'images/help-circle-24.png' %}" width="20"> Help
                 </a>
               </div>
