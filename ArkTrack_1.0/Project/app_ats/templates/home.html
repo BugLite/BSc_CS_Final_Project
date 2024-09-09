@@ -12,7 +12,6 @@
             <a class="navbar-item logo-static" href="{% url 'home' %}">
                 <img src="{% static 'images/logo.svg' %}" alt="Logo" width="140" height="40">
             </a>
-            <!-- Placeholder for current time -->
             <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
                 <span id="current-time"></span>
             </div>
@@ -42,50 +41,46 @@
     <section class="main-sect">
         <div class="card">
             <div class="card-content">
-                <div class="content">
-                    Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec
-                    id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus
-                    et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis
-                    consectetur purus sit amet fermentum.
+                <div style="text-align: center;" class="content">
+                    Hello! Welcome to the <b>ArkTrack System</b> Surveillance Environment. Monitor and Enhance the security of your Environment with our Intelligent System. 
                 </div>
             </div>
         </div>
 
-        <!-- Grid Layout for Webcam and Motion Detection Feeds -->
             <div class="columns">
-                <!-- Webcam Feed Container -->
+                <!-- Tracker A Feed -->
                 <div class="column is-half">
                     <div class="box">
-                        
+                        <h4 class="title is-4">Tracker A | Feed</h4>
                         <form method="POST" id="toggleForm">
                             {% csrf_token %}
-                            <label for="intellisenseToggle">Enable Intellisense</label>
+                            <label for="intellisenseToggle">Enable Intellisense: </label>
                             <input type="checkbox" id="intellisenseToggle" name="intellisense_active" {% if intellisense_active %} checked {% endif %}>
-                            <button type="submit">Apply</button>
+                            <button style="color: rgb(254, 254, 254); margin-left: 2%; padding: 5px; background-color: rgb(166, 23, 23); border-radius: 30px;" type="submit">Apply Changes</button>
                         </form>
 
-                        <h4 class="title is-4">Webcam Feed</h4>
-                        <a href="/tracker-main">fullscreen</a>
+                        <a style="color: brown;" href="/tracker-main">fullscreen</a>
                         <img id="webcam-feed" src="{% url 'main_feed' %}" alt="Webcam Feed" class="image is-16by9">
                     </div>
                 </div>
 
-                <!-- Motion Detection Feed Container -->
+                <!-- Tracker B Feed -->
                 <div class="column is-half">
                     <div class="box">
-                        <h4 class="title is-4">Motion Detector Feed</h4>
-                        <a href="/tracker-sub">fullscreen</a>
+                        <h4 class="title is-4">Tracker B | Feed</h4>
+                        <a style="color: brown;" href="/tracker-sub"> fullscreen </a>
                         <img id="motion-detection-feed" src="{% url 'sub_feed' %}" alt="Motion Detection Feed" class="image is-16by9">
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Live Camera Feed -->
         <div class="container">
             <div class="columns is-fullwidth">
                 <div class="column">
                     <div class="box">
-                        <h4 class="title is-4">Camera Feed</h4>
-                        <a href="/camera-main">fullscreen</a>
+                        <h4 class="title is-4">Live Camera | Feed</h4>
+                        <a style="color: brown;" href="/camera-main">fullscreen</a>
                         <img id="camera-feed" src="{% url 'camera_feed' %}" alt="Camera Feed" class="image is-16by9">
                     </div>
                 </div>

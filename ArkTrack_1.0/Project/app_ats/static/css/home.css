@@ -3,26 +3,21 @@
     margin: 0;
 }
 
-
 .navbar {
     font-size: 16px;
-}
-
-/* Ensure the navbar spans the full width of the viewport */
-.navbar {
     width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
-/* Change font color on hover */
+.navbar-brand > a > img {
+    margin-left: 10px;
+    scale: 2.3;
+}
+
 .navbar-item:hover {
     background-color: black;
     scale: 1.08;
-}
-
-/* Optional: Adjust the spacing or padding of the navbar */
-.navbar {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
 }
 
 .logo-static { 
@@ -33,11 +28,6 @@
 
 .pk-time {
     font-size: 15px;
-}
-
-.navbar-brand > a > img {
-    margin-left: 10px;
-    scale: 2.3;
 }
 
 .footer {
@@ -53,4 +43,9 @@
     padding: 2rem;
     background-color: white;
     color: black;
+}
+
+.button.is-fullwidth {
+    width: 50%;
+    margin: 0 auto;
 }

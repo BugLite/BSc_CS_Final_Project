@@ -12,7 +12,6 @@
             <a class="navbar-item logo-static" href="{% url 'home' %}">
                 <img src="{% static 'images/logo.svg' %}" alt="Logo" width="140" height="40">
             </a>
-            <!-- Placeholder for current time -->
             <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
                 <span id="current-time"></span>
             </div>
@@ -48,7 +47,7 @@
                         <figure class="image">
                             <video class="is-fullwidth" controls>
                                 <source src="{{ MEDIA_URL }}{{ video.file_path }}" type="video/mp4">
-                                Your browser does not support the video tag.
+                                Your browser does not support the video format.
                             </video>
                         </figure>
                         <div class="content">
@@ -57,7 +56,7 @@
                                 Recorded on: {{ video.recorded_timestamp }} <br>
                                 Duration: {{ video.duration }}
                             </p>
-                            <!-- Delete button -->
+                            <!-- delete button -->
                             <form action="{% url 'delete_video' video.title %}" method="POST" style="display:inline;">
                                 {% csrf_token %}
                                 <button type="submit" class="button is-danger">Delete</button>

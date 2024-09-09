@@ -12,7 +12,6 @@
             <a class="navbar-item logo-static" href="{% url 'home' %}">
                 <img src="{% static 'images/logo.svg' %}" alt="Logo" width="140" height="40">
             </a>
-            <!-- Placeholder for current time -->
             <div class="navbar-item logo-static pk-time" style="cursor:text !important;">
                 <span id="current-time"></span>
             </div>
@@ -39,37 +38,36 @@
         </div>
     </nav>
 
-
+    <!-- help page instructions -->
     <section>
         <div class="container m-6">
             <div class="content">
-                <h2 class="title is-3">How to Use the ArkTrack System</h2>
-                <p class="subtitle is-5">Follow these steps to get started with the ArkTrack System:</p>
+                <h2 class="title is-3">About <b style="color: rgb(30, 192, 197);">ArkTrack System</b></h2>
                 
-                <ol class="is-clickable">
+                <ul>
                     <li>
-                        <h4 class="title is-4">Step 1: Log In</h4>
-                        <p>Visit the <a href="{% url 'home' %}" class="has-text-primary">Home</a> page and log in using your credentials. If you don't have an account, you can register from this page as well.</p>
+                        <h4 class="title">Surveillance Feeds:</h4>
+                        <p style="margin-bottom: 2%;">Surveillance feeds are available on the <a href="{% url 'home' %}" class="has-text-danger">Home</a> page. There are <b>3 Security Feeds</b> | Tracker A Feed | Tracker B Feed | Live Feed</p>
                     </li>
                     <li>
-                        <h4 class="title is-4">Step 2: Set Up Your Security Preferences</h4>
-                        <p>Navigate to the <a href="{% url 'dashboard' %}" class="has-text-primary">Dashboard</a> to configure your security preferences. Set up the areas you want to monitor and adjust the sensitivity settings as needed.</p>
+                        <h4 class="title">IntelliSense Model:</h4>
+                        <p style="margin-bottom: 2%;">If your system is capable of handling the computational load of the <b>IntelliSense Classification Model</b>, you can enable it in  <a href="{% url 'home' %}" class="has-text-danger">Home</a> page on Tracker A Feed.</p>
                     </li>
                     <li>
-                        <h4 class="title is-4">Step 3: Add Authorities</h4>
-                        <p>Go to the <a href="{% url 'help' %}" class="has-text-primary">Help</a> page and follow the instructions to add the authorities you want to alert in case of suspicious activity. Ensure their contact details are accurate.</p>
+                        <h4 class="title">Manage Recordings:</h4>
+                        <p style="margin-bottom: 2%;">To <b>View or Delete</b> system recordings visit the <a href="{% url 'dashboard' %}" class="has-text-danger">Dashboard</a> page.</p>
                     </li>
                     <li>
-                        <h4 class="title is-4">Step 4: Monitor Your System</h4>
-                        <p>Once your preferences are set, you can monitor live feeds and check recorded footage on the <a href="{% url 'dashboard' %}" class="has-text-primary">Dashboard</a>. Ensure that your system is functioning correctly by reviewing the logs and notifications.</p>
+                        <h4 class="title">Email Management:</h4>
+                        <p style="margin-bottom: 2%;"> If a recording is captured, you will receive an Email Alert. Visit your associated <a href="#" class="has-text-danger">Email</a> account to monitor notifications.</p>
                     </li>
                     <li>
-                        <h4 class="title is-4">Step 5: Respond to Alerts</h4>
-                        <p>If an alert is triggered, you will receive a notification. Follow the instructions provided to respond promptly and ensure the security of your premises.</p>
+                        <h4 class="title">Alert Authorities:</h4>
+                        <p style="margin-bottom: 2%;">If you wish to alert the Authorities urgently in case of suspicious or concerning activity, visit the <a href="{% url 'report' %}" class="has-text-danger">Report</a> page immmediately!</p>
                     </li>
-                </ol>
+                </ul>
                 
-                <p class="has-text-grey">For further assistance, visit the <a href="{% url 'help' %}" class="has-text-primary">Help</a> page or contact our support team.</p>
+                <p class="has-text-grey">For further assistance, email us at <a href="#" class="has-text-primary">support@arktracksystem.com</a></p>
             </div>
         </div>
     </section>
