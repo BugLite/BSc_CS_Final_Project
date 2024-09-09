@@ -27,8 +27,8 @@ DEBUG = True
 
 # EMAIL Settings:
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'hyder.devop@gmail.com'
-EMAIL_HOST_PASSWORD = 'gqanbgcgeylhrmpi' #App Password
+EMAIL_HOST_USER = 'random@gmail.com'
+EMAIL_HOST_PASSWORD = 'randomrandom'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
