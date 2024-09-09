@@ -11,7 +11,9 @@ the security requirements of users without requiring vast investments in high-gr
     Django: 5.0.7
     numpy: 2.0.1
     opencv-python: 4.10.0.84
+    ffmpeg-python: 0.2.0
     ultralytics: 8.2.74
+    ultralytics-thop: 2.0.0
     YOLO: YOLOv8n model
 
 ## Django SuperUser
